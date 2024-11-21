@@ -26,6 +26,7 @@ function Navbar() {
   const trainerLinks = [
     { path: "/trainer/dashboard", label: "Dashboard" },
     { path: "/trainer/profile", label: "Profile" },
+    { path: "/trainer/create-session", label: "Create Session" },
     { path: "/trainer/edit-schedule", label: "Edit Schedule" },
     { action: handleLogout, label: "Logout" },
   ];

@@ -42,6 +42,7 @@ function Profile() {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchProfileData();
   }, [userType]);

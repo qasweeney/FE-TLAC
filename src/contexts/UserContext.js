@@ -25,8 +25,6 @@ export const UserProvider = ({ children }) => {
   };
 
   const checkSession = async () => {
-    console.log("CheckSession called");
-
     try {
       const response = await fetch(`${apiUrl}auth/validate`, {
         method: "GET",
