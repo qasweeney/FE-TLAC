@@ -9,12 +9,11 @@ import Profile from "../pages/Profile";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import CreateSession from "../pages/CreateSession";
+import SessionRegister from "../pages/SessionRegister";
 
 const AppRoutes = () => {
   const { userType } = useUser();
   const navigate = useNavigate();
-
-  console.log(userType);
 
   return (
     <Routes>
@@ -91,6 +90,14 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute requiredRole="Member">
             <MemberDashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/member/session-register"
+        element={
+          <ProtectedRoute requiredRole="Member">
+            <SessionRegister />
           </ProtectedRoute>
         }
       />

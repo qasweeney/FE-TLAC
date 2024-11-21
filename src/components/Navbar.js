@@ -20,6 +20,7 @@ function Navbar() {
   const memberLinks = [
     { path: "/member/dashboard", label: "Dashboard" },
     { path: "/member/profile", label: "Profile" },
+    { path: "/member/session-register", label: "Register for a Session" },
     { action: handleLogout, label: "Logout" },
   ];
 

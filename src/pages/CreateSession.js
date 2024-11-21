@@ -5,7 +5,6 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 function CreateSession() {
   const { userId, userType } = useUser();
-  // const [profileData, setProfileData] = useState(null);
   const [sessions, setExistingSessions] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -44,7 +43,6 @@ function CreateSession() {
       if (response.ok) {
         const data = await response.json();
         if (data?.sessionPrice) {
-          console.log("ok");
           setFormData((preexisting) => ({
             ...preexisting,
             price: data.sessionPrice,
@@ -79,6 +77,16 @@ function CreateSession() {
     const startTime = new Date(`${formData.date}T${formData.time}:00`);
     const endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
 
+    const daysOfWeek = [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ];
+    const selectedDayOfWeek = daysOfWeek[new Date(formData.date).getDay()];
     const isTimeConflict = sessions.some((session) => {
       let [hours, minutes, seconds] = session.startTime.split(":").map(Number);
       const sessionStartTime = new Date(session.date);
@@ -95,44 +103,75 @@ function CreateSession() {
       );
     });
 
+    const isConflictWithRecurring = sessions.some((session) => {
+      if (session.date === null && session.dayOfWeek === selectedDayOfWeek) {
+        const selectedStartTime = new Date(`1970-01-01T${formData.time}:00`);
+        const selectedEndTime = new Date(
+          selectedStartTime.getTime() + 60 * 60 * 1000
+        );
+
+        const sessionStartTime = new Date(`1970-01-01T${session.startTime}`);
+        const sessionEndTime = new Date(
+          sessionStartTime.getTime() + 60 * 60 * 1000
+        );
+        return (
+          (selectedStartTime >= sessionStartTime &&
+            selectedStartTime < sessionEndTime) ||
+          (selectedEndTime > sessionStartTime &&
+            selectedEndTime <= sessionEndTime)
+        );
+      }
+      return false;
+    });
+
     if (isTimeConflict) {
       alert("The selected time conflicts with an existing session.");
       return;
     }
-    console.log("Form Submitted:", formData);
-    // Make your POST request here
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    console.log(formData.time);
-    const raw = JSON.stringify({
-      date: formData.date,
-      startTime: `${formData.time}:00`,
-      sessionType: "One-Time",
-      sessionStatus: "Available",
-      price: formData.price,
-      trainerId: userId,
-    });
+    if (isConflictWithRecurring) {
+      alert(
+        "The selected time conflicts with a recurring session in your schedule."
+      );
+    }
 
-    const requestOptions = {
-      method: "POST",
-      credentials: "include",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
+    try {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      const raw = JSON.stringify({
+        date: formData.date,
+        startTime: `${formData.time}:00`,
+        sessionType: "One-Time",
+        sessionStatus: "Available",
+        price: formData.price,
+        trainerId: userId,
+      });
 
-    fetch(`${apiUrl}sessions`, requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.error(error));
+      const requestOptions = {
+        method: "POST",
+        credentials: "include",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      fetch(`${apiUrl}sessions`, requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          setExistingSessions((prevSessions) => [...prevSessions, result]);
+
+          alert("Session created successfully!");
+        })
+        .catch((error) => console.error(error));
+    } catch (error) {
+      console.error("Error submitting session:", error);
+      alert("Failed to create session. Please try again.");
+    }
   };
 
   useEffect(() => {
     fetchProfileData();
     fetchSessions();
-  }, [userType]);
-
-  console.log(Array.toString(Object.toString(sessions)));
+  }, [userType, sessions]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -141,7 +180,6 @@ function CreateSession() {
   if (error) {
     return <div>Error: {error}</div>;
   }
-  console.log(formData.price);
   return (
     <div>
       <Navbar />
@@ -191,7 +229,6 @@ function CreateSession() {
               required
             />
           </div>
-          {/* Other form fields */}
           <button type="submit" className="btn btn-primary">
             Create Session
           </button>
