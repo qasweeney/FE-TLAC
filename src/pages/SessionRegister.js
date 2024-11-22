@@ -7,7 +7,11 @@ const apiUrl = process.env.REACT_APP_API_URL;
 function SessionRegister() {
   const { userId, userType } = useUser();
   const [sessions, setSessions] = useState([]);
-  const [formData, setFormData] = useState({ date: "", time: "" });
+  const [formData, setFormData] = useState({
+    date: "",
+    time: "",
+    availableOnly: true,
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const handleChange = (e) => {
@@ -40,25 +44,36 @@ function SessionRegister() {
     e.preventDefault();
     setError(null);
 
-    try {
-      const response = await fetch(`${apiUrl}sessions/search`, {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch sessions.");
-      }
-
-      const data = await response.json();
-      setSessions(data);
-    } catch (err) {
-      setError(err.message);
-      console.error(err);
-    }
+    fetchSessions();
   };
+  function handleRegister(sessionID) {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    console.log(formData.date);
+    const raw = JSON.stringify({
+      SessionID: sessionID,
+      MemberID: userId,
+      Date: formData.date,
+    });
+
+    const requestOptions = {
+      method: "PUT",
+      headers: myHeaders,
+      credentials: "include",
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(`${apiUrl}sessions/register`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        alert("Session registered");
+        fetchSessions();
+      })
+      .catch((error) => console.error(error));
+    // console.log(props.session.sessionID);
+    // console.log(userId);
+  }
   return (
     <div>
       <Navbar />
@@ -94,7 +109,7 @@ function SessionRegister() {
           <div>
             <h2>Available sessions:</h2>
             <SessionList
-              onRegister={fetchSessions}
+              onRegister={handleRegister}
               view="member"
               type="available"
               sessions={sessions}

@@ -48,7 +48,9 @@ function MemberSession(props) {
         </p>
         <p>Time: {getTimeFromString(props.session.startTime)}</p>
         <p>Price: ${props.session.price}</p>
-        <button onClick={handleRegister}>Register</button>
+        <button onClick={() => props.onRegister(props.session.sessionID)}>
+          Register
+        </button>
       </div>
     );
   } else {
