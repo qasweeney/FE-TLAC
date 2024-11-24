@@ -157,7 +157,8 @@ function CreateSession() {
       fetch(`${apiUrl}sessions`, requestOptions)
         .then((response) => response.text())
         .then((result) => {
-          setExistingSessions((prevSessions) => [...prevSessions, result]);
+          // setExistingSessions((prevSessions) => [...prevSessions, result]);
+          fetchSessions();
 
           alert("Session created successfully!");
         })
@@ -171,7 +172,7 @@ function CreateSession() {
   useEffect(() => {
     fetchProfileData();
     fetchSessions();
-  }, [userType, sessions]);
+  }, [userType]);
 
   if (loading) {
     return <div>Loading...</div>;

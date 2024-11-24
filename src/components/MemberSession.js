@@ -1,9 +1,26 @@
+import { useState } from "react";
 import { useUser } from "../contexts/UserContext";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 function MemberSession(props) {
   const { userId } = useUser();
   const trainer = props.session.trainer;
+  const today = new Date();
+  const sessionDate = new Date(props.session.date);
+  const [rating, setRating] = useState(props.session.rating || 0.0);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleRatingChange = (e) => {
+    const value = e.target.value;
+    if (/^\d{0,1}(\.\d{0,1})?$/.test(value) && value >= 0 && value <= 5) {
+      setRating(value);
+    }
+  };
+
+  const handleSave = () => {
+    props.updateRating(props.session.sessionID, parseFloat(rating));
+    setIsEditing(false);
+  };
   function getTimeFromString(timeString) {
     const [hours, minutes, seconds] = timeString.split(":").map(Number);
 
@@ -11,34 +28,7 @@ function MemberSession(props) {
     date.setHours(hours, minutes, seconds, 0);
     return date.toLocaleTimeString();
   }
-  function handleRegister() {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    console.log(props.session.date);
-    const raw = JSON.stringify({
-      SessionID: props.session.sessionID,
-      MemberID: userId,
-      Date: props.session.date,
-    });
 
-    const requestOptions = {
-      method: "PUT",
-      headers: myHeaders,
-      credentials: "include",
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch(`${apiUrl}sessions/register`, requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        alert("Session registered");
-        props.onRegister();
-      })
-      .catch((error) => console.error(error));
-    // console.log(props.session.sessionID);
-    // console.log(userId);
-  }
   if (props.type === "available") {
     return (
       <div>
@@ -53,12 +43,62 @@ function MemberSession(props) {
         </button>
       </div>
     );
-  } else {
+  } else if (
+    props.type === "registered" &&
+    sessionDate > today &&
+    props.session.sessionStatus === "Registered"
+  ) {
     return (
       <div>
-        <h1>Not available</h1>
+        <h1>Member Session</h1>
+        <p>
+          Trainer Name: {trainer.firstName} {trainer.lastName}
+        </p>
+        <p>Time: {getTimeFromString(props.session.startTime)}</p>
+        <p>Date: {sessionDate.toDateString()}</p>
+        <p>Price: ${props.session.price}</p>
       </div>
     );
+  } else if (
+    props.type === "past" &&
+    sessionDate < today &&
+    props.session.sessionStatus === "Registered"
+  ) {
+    return (
+      <div>
+        <h1>Member Session</h1>
+        <p>
+          Trainer Name: {trainer.firstName} {trainer.lastName}
+        </p>
+        <p>Time: {getTimeFromString(props.session.startTime)}</p>
+        <p>Date: {sessionDate.toDateString()}</p>
+        <p>Price: ${props.session.price}</p>
+        {isEditing ? (
+          <div>
+            <label>
+              Rating (0.0 - 5.0):
+              <input
+                type="number"
+                value={rating}
+                step="0.1"
+                min="0"
+                max="5"
+                onChange={handleRatingChange}
+              />
+            </label>
+            <button onClick={handleSave}>Save</button>
+            <button onClick={() => setIsEditing(false)}>Cancel</button>
+          </div>
+        ) : (
+          <p>
+            Rating: {props.session.rating}{" "}
+            <button onClick={() => setIsEditing(true)}>Edit</button>
+          </p>
+        )}
+      </div>
+    );
+  } else {
+    return null;
   }
   return (
     <div>

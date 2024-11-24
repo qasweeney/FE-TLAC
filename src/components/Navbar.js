@@ -20,6 +20,7 @@ function Navbar() {
   const memberLinks = [
     { path: "/member/dashboard", label: "Dashboard" },
     { path: "/member/profile", label: "Profile" },
+    { path: "/member/past-sessions", label: "Past Sessions" },
     { path: "/member/session-register", label: "Register for a Session" },
     { action: handleLogout, label: "Logout" },
   ];
@@ -29,6 +30,7 @@ function Navbar() {
     { path: "/trainer/profile", label: "Profile" },
     { path: "/trainer/create-session", label: "Create Session" },
     { path: "/trainer/edit-schedule", label: "Edit Schedule" },
+    { path: "/trainer/past-sessions", label: "Past Sessions/Data" },
     { action: handleLogout, label: "Logout" },
   ];
 

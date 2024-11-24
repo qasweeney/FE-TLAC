@@ -8,8 +8,8 @@ function TrainerSession(props) {
   }
 
   const member = props.session.member;
-
-  if (props.type === "registered") {
+  const sessionDate = new Date(props.session.date);
+  if (props.type === "registered" && sessionDate > new Date()) {
     return (
       <div>
         <h1>Trainer Session</h1>
@@ -21,12 +21,29 @@ function TrainerSession(props) {
         <p>Price: ${props.session.price}</p>
       </div>
     );
-  } else {
+  } else if (
+    props.type === "past" &&
+    sessionDate < new Date() &&
+    props.session.sessionStatus === "Registered"
+  ) {
     return (
       <div>
-        <h1>Not registered</h1>
+        <h1>Trainer Session</h1>
+        <p>
+          Member Name: {member.firstName} {member.lastName}
+        </p>
+        <p>Date: {new Date(props.session.date).toDateString()}</p>
+        <p>Time: {getTimeFromString(props.session.startTime)}</p>
+        <p>Price: ${props.session.price}</p>
+        {props.session.rating === null ? (
+          <p>Rating: Not yet rated</p>
+        ) : (
+          <p>Rating: {props.session.rating}</p>
+        )}
       </div>
     );
+  } else {
+    return null;
   }
 }
 export default TrainerSession;

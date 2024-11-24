@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import SessionList from "../components/SessionList";
 import { useUser } from "../contexts/UserContext";
+import TrainerSessionData from "../components/TrainerSessionData";
 const apiUrl = process.env.REACT_APP_API_URL;
 
-function TrainerDashboard() {
-  const { userId, userType } = useUser();
-  const [sessions, setExistingSessions] = useState(null);
+function TrainerPastSessions() {
+  const { userId } = useUser();
+  const [sessions, setSessions] = useState([]);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const [error, setError] = useState(null);
   async function fetchSessions() {
     try {
       const response = await fetch(`${apiUrl}sessions/trainer/${userId}`, {
@@ -18,7 +19,7 @@ function TrainerDashboard() {
       });
       if (response.ok) {
         const data = await response.json();
-        setExistingSessions(data);
+        setSessions(data);
       } else {
         const errorData = await response.json();
         setError(errorData.message || "Failed to fetch profile data.");
@@ -29,20 +30,24 @@ function TrainerDashboard() {
       setLoading(false);
     }
   }
-  useEffect(() => {
+  useState(() => {
     fetchSessions();
-  }, [userType]);
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  }, userId);
   return (
     <div>
       <Navbar />
-      <h1>Trainer Dashboard</h1>
-      <h2>Upcoming Registered Sessions:</h2>
-      <SessionList view="trainer" type="registered" sessions={sessions} />
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+          <TrainerSessionData sessions={sessions} />
+          <h1>Trainer past sessions</h1>
+          <SessionList view="trainer" type="past" sessions={sessions} />
+        </div>
+      )}
+      {/* <SessionList view="trainer" type="past" /> */}
     </div>
   );
 }
 
-export default TrainerDashboard;
+export default TrainerPastSessions;

@@ -10,6 +10,8 @@ import Login from "../pages/Login";
 import Home from "../pages/Home";
 import CreateSession from "../pages/CreateSession";
 import SessionRegister from "../pages/SessionRegister";
+import TrainerPastSessions from "../pages/TrainerPastSessions";
+import MemberPastSessions from "../pages/MemberPastSessions";
 
 const AppRoutes = () => {
   const { userType } = useUser();
@@ -86,6 +88,14 @@ const AppRoutes = () => {
         }
       />
       <Route
+        path="/trainer/past-sessions"
+        element={
+          <ProtectedRoute requiredRole="Trainer">
+            <TrainerPastSessions />
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/member/dashboard"
         element={
           <ProtectedRoute requiredRole="Member">
@@ -106,6 +116,14 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute requiredRole="Member">
             <Profile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/member/past-sessions"
+        element={
+          <ProtectedRoute requiredRole="Member">
+            <MemberPastSessions />
           </ProtectedRoute>
         }
       />
