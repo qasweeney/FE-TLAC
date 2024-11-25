@@ -8,9 +8,29 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("Member");
-  const { setUserType: setGlobalUserType } = useUser();
+  const { setUserType: setGlobalUserType, logout } = useUser();
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  const fetchTrainer = async (id) => {
+    let result;
+    try {
+      const requestOptions = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      result = await fetch(`${apiUrl}trainers/${id}`, requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          return result.isActive;
+        })
+        .catch((error) => console.error(error));
+    } catch (error) {
+      setError("Error");
+    }
+    return result;
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,11 +44,21 @@ function Login() {
       });
       if (response.ok) {
         setGlobalUserType(userType);
+        let res = await response.json();
+        console.log(res.userId);
 
         if (userType === "Admin") {
           navigate("/admin/dashboard");
         } else if (userType === "Trainer") {
-          navigate("/trainer/dashboard");
+          const trainerActive = await fetchTrainer(res.userId);
+          if (trainerActive) {
+            console.log(trainerActive);
+            navigate("/trainer/dashboard");
+          } else {
+            alert("Trainer account not yet approved by TLAC staff.");
+            await logout();
+            navigate("/");
+          }
         } else {
           navigate("/member/dashboard");
         }

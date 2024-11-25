@@ -12,6 +12,7 @@ import CreateSession from "../pages/CreateSession";
 import SessionRegister from "../pages/SessionRegister";
 import TrainerPastSessions from "../pages/TrainerPastSessions";
 import MemberPastSessions from "../pages/MemberPastSessions";
+import Register from "../pages/Register";
 
 const AppRoutes = () => {
   const { userType } = useUser();
@@ -44,6 +45,20 @@ const AppRoutes = () => {
             <Navigate to="/trainer/dashboard" replace />
           ) : (
             <Login />
+          )
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          userType === "Admin" ? (
+            <Navigate to="/admin/dashboard" replace />
+          ) : userType === "Member" ? (
+            <Navigate to="/member/dashboard" replace />
+          ) : userType === "Trainer" ? (
+            <Navigate to="/trainer/dashboard" replace />
+          ) : (
+            <Register />
           )
         }
       />
