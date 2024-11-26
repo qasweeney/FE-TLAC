@@ -19,6 +19,8 @@ function SessionRegister() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const today = new Date().toISOString().split("T")[0];
+
   const fetchSessions = async () => {
     try {
       const response = await fetch(`${apiUrl}sessions/search`, {
@@ -85,6 +87,7 @@ function SessionRegister() {
             type="date"
             id="date"
             name="date"
+            min={today}
             value={formData.date}
             onChange={handleChange}
             required

@@ -13,6 +13,7 @@ import SessionRegister from "../pages/SessionRegister";
 import TrainerPastSessions from "../pages/TrainerPastSessions";
 import MemberPastSessions from "../pages/MemberPastSessions";
 import Register from "../pages/Register";
+import EditSchedule from "../pages/EditSchedule";
 
 const AppRoutes = () => {
   const { userType } = useUser();
@@ -99,6 +100,14 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute requiredRole="Trainer">
             <CreateSession />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/trainer/edit-schedule"
+        element={
+          <ProtectedRoute requiredRole="Trainer">
+            <EditSchedule />
           </ProtectedRoute>
         }
       />

@@ -14,7 +14,7 @@ function CreateSession() {
     description: "",
     price: "",
   });
-
+  const today = new Date().toISOString().split("T")[0];
   async function fetchSessions() {
     try {
       const response = await fetch(`${apiUrl}sessions/trainer/${userId}`, {
@@ -193,6 +193,7 @@ function CreateSession() {
               type="date"
               id="date"
               name="date"
+              min={today}
               value={formData.date}
               onChange={handleChange}
               required
