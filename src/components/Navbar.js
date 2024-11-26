@@ -1,6 +1,10 @@
 import React from "react";
 import { useUser } from "../contexts/UserContext";
 import { Link, useNavigate } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 
 function Navbar() {
   const { userType, logout } = useUser();
@@ -51,7 +55,14 @@ function Navbar() {
       : guestLinks;
 
   return (
-    <nav>
+    <nav className="navbar">
+    <div className="navbar-left">
+        <div className="logo">
+          <FontAwesomeIcon icon={faDumbbell} size="lg" />
+          <span>Train Like A Champion</span>
+        </div>
+      </div>
+      <div className="navbar-links">
       <ul>
         {links.map((link, index) => (
           <li key={index}>
@@ -63,6 +74,16 @@ function Navbar() {
           </li>
         ))}
       </ul>
+    </div>
+
+      {/* User Icon Section */}
+      <div className="user-icon">
+        <Link to="/profile">
+          <FaUserCircle size={30} />
+        </Link>
+      </div>
+
+      
     </nav>
   );
 }
