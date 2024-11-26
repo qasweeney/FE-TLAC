@@ -76,7 +76,7 @@ function Navbar() {
       </ul>
     </div>
 
-      {/* User Icon Section */}
+      
       <div className="user-icon">
         <Link to="/profile">
           <FaUserCircle size={30} />
