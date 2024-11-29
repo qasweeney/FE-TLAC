@@ -3,8 +3,8 @@ import { useUser } from "../contexts/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDumbbell } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar() {
   const { userType, logout } = useUser();
@@ -56,34 +56,31 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-    <div className="navbar-left">
+      <div className="navbar-left">
         <div className="logo">
           <FontAwesomeIcon icon={faDumbbell} size="lg" />
           <span>Train Like A Champion</span>
         </div>
       </div>
       <div className="navbar-links">
-      <ul>
-        {links.map((link, index) => (
-          <li key={index}>
-            {link.path ? (
-              <Link to={link.path}>{link.label}</Link>
-            ) : (
-              <button onClick={link.action}>{link.label}</button>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
+        <ul>
+          {links.map((link, index) => (
+            <li key={index}>
+              {link.path ? (
+                <Link to={link.path}>{link.label}</Link>
+              ) : (
+                <button onClick={link.action}>{link.label}</button>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
 
-      
       <div className="user-icon">
-        <Link to="/profile">
+        <Link to={`/${userType}/profile`}>
           <FaUserCircle size={30} />
         </Link>
       </div>
-
-      
     </nav>
   );
 }

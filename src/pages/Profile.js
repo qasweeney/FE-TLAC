@@ -9,6 +9,9 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const [isEditingBio, setIsEditingBio] = useState(false);
+  const [isEditingProfilePic, setIsEditingProfilePic] = useState(false);
+
   const fetchProfileData = async () => {
     let endpoint = "";
 
@@ -43,6 +46,50 @@ function Profile() {
     }
   };
 
+  const handleBioChange = (e) => {
+    setProfileData((prev) => ({
+      ...prev,
+      bio: e.target.value,
+    }));
+  };
+
+  const handleProfilePicChange = (e) => {
+    setProfileData((prev) => ({
+      ...prev,
+      profilePic: e.target.value,
+    }));
+  };
+
+  const updateProfile = async (field) => {
+    let body;
+    if (field === "bio") {
+      body = JSON.stringify({
+        Bio: data.bio,
+        ProfilePic: null,
+      });
+    } else if (field === "profilePic") {
+      body = JSON.stringify({
+        Bio: null,
+        ProfilePic: data.profilePic,
+      });
+    }
+    try {
+      await fetch(`${apiUrl}trainers/${userId}/profile`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      });
+      alert("Profile updated successfully!");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      alert("Failed to update profile.");
+    } finally {
+      field === "bio" ? setIsEditingBio(false) : setIsEditingProfilePic(false);
+    }
+  };
+
   useEffect(() => {
     fetchProfileData();
   }, [userType]);
@@ -56,7 +103,6 @@ function Profile() {
   }
 
   const data = profileData;
-  console.log(userType);
 
   return (
     <div>
@@ -79,6 +125,61 @@ function Profile() {
       )}
       {userType === "Trainer" && (
         <div>
+          <div className="profile-pic-section">
+            <h2>Profile Picture</h2>
+            {!isEditingProfilePic ? (
+              <div>
+                <img
+                  src={data.profilePic}
+                  alt="Profile"
+                  style={{
+                    width: "150px",
+                    height: "150px",
+                    borderRadius: "50%",
+                  }}
+                />
+                <button onClick={() => setIsEditingProfilePic(true)}>
+                  Edit
+                </button>
+              </div>
+            ) : (
+              <div>
+                <input
+                  type="url"
+                  value={data.profilePic}
+                  onChange={handleProfilePicChange}
+                  placeholder="Enter new profile picture URL"
+                />
+                <button onClick={() => updateProfile("profilePic")}>
+                  Save
+                </button>
+                <button onClick={() => setIsEditingProfilePic(false)}>
+                  Cancel
+                </button>
+              </div>
+            )}
+          </div>
+
+          <div className="bio-section">
+            <h2>Bio</h2>
+            {!isEditingBio ? (
+              <div>
+                <p>{data.bio || "No bio available."}</p>
+                <button onClick={() => setIsEditingBio(true)}>Edit</button>
+              </div>
+            ) : (
+              <div>
+                <textarea
+                  value={data.bio}
+                  onChange={handleBioChange}
+                  rows="5"
+                  placeholder="Enter new bio"
+                ></textarea>
+                <button onClick={() => updateProfile("bio")}>Save</button>
+                <button onClick={() => setIsEditingBio(false)}>Cancel</button>
+              </div>
+            )}
+          </div>
           <p>
             <strong>Registration Date:</strong> {data.registrationDate}
           </p>
