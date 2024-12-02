@@ -1,5 +1,7 @@
+import { useState } from "react";
 import MemberSession from "./MemberSession";
 import TrainerSession from "./TrainerSession";
+import "./sessionList.css";
 
 function SessionList(props) {
   const registeredSessions = props.sessions.filter(
@@ -11,9 +13,16 @@ function SessionList(props) {
       (s) => s.sessionStatus.toLowerCase() === "registered"
     );
     return (
-      <div>
+      <div className="sessions-container">
         {registeredSessions.map((s, i) => {
-          return <TrainerSession type={props.type} key={i} session={s} />;
+          return (
+            <TrainerSession
+              className="session-card"
+              type={props.type}
+              key={i}
+              session={s}
+            />
+          );
         })}
       </div>
     );
@@ -25,19 +34,27 @@ function SessionList(props) {
   }
   if (props.type === "registered" && props.view === "member") {
     return (
-      <div>
+      <div className="sessions-container">
         {props.sessions.map((s, i) => {
-          return <MemberSession type={props.type} key={i} session={s} />;
+          return (
+            <MemberSession
+              className="session-card"
+              type={props.type}
+              key={i}
+              session={s}
+            />
+          );
         })}
       </div>
     );
   }
   if (props.type === "past" && props.view === "member") {
     return (
-      <div>
+      <div className="sessions-container">
         {props.sessions.map((s, i) => {
           return (
             <MemberSession
+              className="session-card"
               updateRating={props.updateRating}
               type={props.type}
               key={i}
@@ -49,12 +66,18 @@ function SessionList(props) {
     );
   }
   return (
-    <div>
+    <div className="sessions-container">
       {props.sessions.map((s, i) => {
         return props.view === "trainer" ? (
-          <TrainerSession type={props.type} key={i} session={s} />
+          <TrainerSession
+            className="session-card"
+            type={props.type}
+            key={i}
+            session={s}
+          />
         ) : props.view === "member" ? (
           <MemberSession
+            className="session-card"
             onRegister={props.onRegister}
             type={props.type}
             key={i}

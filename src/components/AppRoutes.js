@@ -14,6 +14,7 @@ import TrainerPastSessions from "../pages/TrainerPastSessions";
 import MemberPastSessions from "../pages/MemberPastSessions";
 import Register from "../pages/Register";
 import EditSchedule from "../pages/EditSchedule";
+import ManageUsers from "../pages/ManageUsers";
 
 const AppRoutes = () => {
   const { userType } = useUser();
@@ -76,6 +77,14 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute requiredRole="Admin">
             <Profile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/manage-users"
+        element={
+          <ProtectedRoute requiredRole="Admin">
+            <ManageUsers />
           </ProtectedRoute>
         }
       />

@@ -1,10 +1,20 @@
+import { useState } from "react";
+import DateRangeForm from "../components/DateRangeForm";
 import Navbar from "../components/Navbar";
 
 function AdminDashboard() {
+  const [compare, setCompare] = useState(false);
+  const toggleCompare = () => {
+    setCompare(!compare);
+  };
   return (
     <div>
       <Navbar />
-      <h1>Admin Dashboard</h1>
+      <button onClick={toggleCompare}>Compare</button>
+      <div>
+        <DateRangeForm />
+        {compare && <DateRangeForm />}
+      </div>
     </div>
   );
 }

@@ -40,7 +40,7 @@ function Navbar() {
 
   const adminLinks = [
     { path: "/admin/dashboard", label: "Admin Dashboard" },
-    { path: "/manage-users", label: "Manage Users" },
+    { path: "/admin/manage-users", label: "Manage Users" },
     { path: "/admin/profile", label: "Profile" },
     { action: handleLogout, label: "Logout" },
   ];

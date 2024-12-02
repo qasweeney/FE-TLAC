@@ -7,6 +7,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 function SessionRegister() {
   const { userId, userType } = useUser();
   const [sessions, setSessions] = useState([]);
+  const [currentSessions, setCurrentSessions] = useState([]);
   const [formData, setFormData] = useState({
     date: "",
     time: "",
@@ -20,6 +21,26 @@ function SessionRegister() {
   };
 
   const today = new Date().toISOString().split("T")[0];
+
+  async function fetchCurrentSessions() {
+    try {
+      const response = await fetch(`${apiUrl}sessions/member/${userId}`, {
+        method: "GET",
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setCurrentSessions(data);
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || "Failed to fetch profile data.");
+      }
+    } catch (error) {
+      console.error("Error fetching sessions:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const fetchSessions = async () => {
     try {
@@ -42,39 +63,74 @@ function SessionRegister() {
     }
   };
 
+  useEffect(() => {
+    fetchCurrentSessions();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-
     fetchSessions();
   };
-  function handleRegister(sessionID) {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    console.log(formData.date);
-    const raw = JSON.stringify({
-      SessionID: sessionID,
-      MemberID: userId,
-      Date: formData.date,
-    });
 
-    const requestOptions = {
-      method: "PUT",
-      headers: myHeaders,
-      credentials: "include",
-      body: raw,
-      redirect: "follow",
+  function areTimesWithinAnHour(time1, time2) {
+    const toMinutes = (time) => {
+      const [hours, minutes, seconds] = time.split(":").map(Number);
+      return hours * 60 + minutes + seconds / 60;
     };
 
-    fetch(`${apiUrl}sessions/register`, requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        alert("Session registered");
-        fetchSessions();
-      })
-      .catch((error) => console.error(error));
-    // console.log(props.session.sessionID);
-    // console.log(userId);
+    const time1Minutes = toMinutes(time1);
+    const time2Minutes = toMinutes(time2);
+
+    const difference = Math.abs(time1Minutes - time2Minutes);
+
+    return difference < 60;
+  }
+
+  function handleRegister(session) {
+    const sessionID = session.sessionID;
+    const dateFromInput = new Date(formData.date);
+    const conflict = currentSessions.some((e) => {
+      const selectedDate = dateFromInput.toISOString().slice(0, 10);
+      const thisDate = new Date(e.date).toISOString().slice(0, 10);
+      const isDateSame = selectedDate === thisDate;
+
+      const isTimeConflict = areTimesWithinAnHour(
+        e.startTime,
+        session.startTime
+      );
+      return isDateSame && isTimeConflict;
+    });
+    if (conflict) {
+      alert(
+        "This session conflicts with a session you're currently registered for"
+      );
+    } else {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      const raw = JSON.stringify({
+        SessionID: sessionID,
+        MemberID: userId,
+        Date: formData.date,
+      });
+
+      const requestOptions = {
+        method: "PUT",
+        headers: myHeaders,
+        credentials: "include",
+        body: raw,
+        redirect: "follow",
+      };
+
+      fetch(`${apiUrl}sessions/register`, requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          alert("Session registered");
+          fetchSessions();
+          fetchCurrentSessions();
+        })
+        .catch((error) => console.error(error));
+    }
   }
   return (
     <div>
@@ -116,6 +172,7 @@ function SessionRegister() {
               view="member"
               type="available"
               sessions={sessions}
+              currentSessions={currentSessions}
             />
           </div>
         ) : (

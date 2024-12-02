@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useUser } from "../contexts/UserContext";
+import TrainerProfileGlance from "./TrainerProfileGlance";
+import "./sessionList.css";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 function MemberSession(props) {
@@ -9,6 +11,11 @@ function MemberSession(props) {
   const sessionDate = new Date(props.session.date);
   const [rating, setRating] = useState(props.session.rating || 0.0);
   const [isEditing, setIsEditing] = useState(false);
+  const [showTrainerGlance, setShowTrainerGlance] = useState(false);
+
+  const toggleShowTrainer = () => {
+    setShowTrainerGlance(!showTrainerGlance);
+  };
 
   const handleRatingChange = (e) => {
     const value = e.target.value;
@@ -32,13 +39,32 @@ function MemberSession(props) {
   if (props.type === "available") {
     return (
       <div>
-        <h1>Member Session</h1>
+        <h3>Session</h3>
         <p>
-          Trainer Name: {trainer.firstName} {trainer.lastName}
+          Trainer Name:{" "}
+          <span
+            style={{
+              color: "#007bff",
+              textDecoration: "underline",
+              cursor: "pointer",
+            }}
+            onMouseOver={(e) => {
+              e.target.style.color = "#0056b3";
+              e.target.style.textDecoration = "none";
+            }}
+            onMouseOut={(e) => {
+              e.target.style.color = "#007bff";
+              e.target.style.textDecoration = "underline";
+            }}
+            onClick={toggleShowTrainer}
+          >
+            {trainer.firstName} {trainer.lastName}{" "}
+          </span>
         </p>
         <p>Time: {getTimeFromString(props.session.startTime)}</p>
         <p>Price: ${props.session.price}</p>
-        <button onClick={() => props.onRegister(props.session.sessionID)}>
+        {showTrainerGlance ? <TrainerProfileGlance trainer={trainer} /> : null}
+        <button onClick={() => props.onRegister(props.session)}>
           Register
         </button>
       </div>
@@ -49,14 +75,33 @@ function MemberSession(props) {
     props.session.sessionStatus === "Registered"
   ) {
     return (
-      <div>
-        <h1>Member Session</h1>
+      <div className={props.className}>
+        <h3>Session</h3>
         <p>
-          Trainer Name: {trainer.firstName} {trainer.lastName}
+          Trainer Name:{" "}
+          <span
+            style={{
+              color: "#007bff",
+              textDecoration: "underline",
+              cursor: "pointer",
+            }}
+            onMouseOver={(e) => {
+              e.target.style.color = "#0056b3";
+              e.target.style.textDecoration = "none";
+            }}
+            onMouseOut={(e) => {
+              e.target.style.color = "#007bff";
+              e.target.style.textDecoration = "underline";
+            }}
+            onClick={toggleShowTrainer}
+          >
+            {trainer.firstName} {trainer.lastName}{" "}
+          </span>
         </p>
         <p>Time: {getTimeFromString(props.session.startTime)}</p>
         <p>Date: {sessionDate.toDateString()}</p>
         <p>Price: ${props.session.price}</p>
+        {showTrainerGlance ? <TrainerProfileGlance trainer={trainer} /> : null}
       </div>
     );
   } else if (
@@ -65,10 +110,28 @@ function MemberSession(props) {
     props.session.sessionStatus === "Registered"
   ) {
     return (
-      <div>
-        <h1>Member Session</h1>
+      <div className={props.className}>
+        <h3>Session</h3>
         <p>
-          Trainer Name: {trainer.firstName} {trainer.lastName}
+          Trainer Name:{" "}
+          <span
+            style={{
+              color: "#007bff",
+              textDecoration: "underline",
+              cursor: "pointer",
+            }}
+            onMouseOver={(e) => {
+              e.target.style.color = "#0056b3";
+              e.target.style.textDecoration = "none";
+            }}
+            onMouseOut={(e) => {
+              e.target.style.color = "#007bff";
+              e.target.style.textDecoration = "underline";
+            }}
+            onClick={toggleShowTrainer}
+          >
+            {trainer.firstName} {trainer.lastName}{" "}
+          </span>
         </p>
         <p>Time: {getTimeFromString(props.session.startTime)}</p>
         <p>Date: {sessionDate.toDateString()}</p>
@@ -95,6 +158,7 @@ function MemberSession(props) {
             <button onClick={() => setIsEditing(true)}>Edit</button>
           </p>
         )}
+        {showTrainerGlance ? <TrainerProfileGlance trainer={trainer} /> : null}
       </div>
     );
   } else {
@@ -102,7 +166,7 @@ function MemberSession(props) {
   }
   return (
     <div>
-      <h1>Member Session</h1>
+      <h3>Session</h3>
     </div>
   );
 }

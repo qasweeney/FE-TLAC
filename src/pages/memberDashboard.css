@@ -1,0 +1,35 @@
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #f4f4f4;
+  border-bottom: 2px solid #ddd;
+}
+
+.top-section h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin: 0;
+  font-weight: 600;
+}
+
+.top-section button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.top-section button:hover {
+  background-color: #0056b3;
+}
+
+.top-section button:active {
+  background-color: #004085;
+  transform: scale(0.95);
+}

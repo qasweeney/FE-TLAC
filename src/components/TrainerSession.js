@@ -11,8 +11,8 @@ function TrainerSession(props) {
   const sessionDate = new Date(props.session.date);
   if (props.type === "registered" && sessionDate > new Date()) {
     return (
-      <div>
-        <h1>Trainer Session</h1>
+      <div className={props.className}>
+        <h3>Session</h3>
         <p>
           Member Name: {member.firstName} {member.lastName}
         </p>
@@ -27,8 +27,8 @@ function TrainerSession(props) {
     props.session.sessionStatus === "Registered"
   ) {
     return (
-      <div>
-        <h1>Trainer Session</h1>
+      <div className={props.className}>
+        <h3>Session</h3>
         <p>
           Member Name: {member.firstName} {member.lastName}
         </p>
