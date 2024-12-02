@@ -1,12 +1,15 @@
+import "./displayScheduleDay.css";
+
 function DisplayScheduleDay({ day, daySchedule, removeEntry }) {
   return (
-    <div>
+    <div className="display-schedule-day">
       <h3>{day}:</h3>
       {daySchedule.map((e) => (
-        <div key={e.sessionID}>
-          <h4>Recurring Session</h4>
+        <div className="session-card" key={e.sessionID}>
           <p>
-            Time:{new Date(`1990-10-10T${e.startTime}`).toLocaleTimeString()}
+            {new Date(`1990-10-10T${e.startTime}`).toLocaleTimeString(
+              ([], { hour: "2-digit", minute: "2-digit" })
+            )}
           </p>
           <button
             onClick={() => {

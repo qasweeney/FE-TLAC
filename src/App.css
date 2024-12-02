@@ -37,13 +37,12 @@
   }
 }
 
-
 body {
-  height: 2000px;
-  
-  color: #5e5e5e;
-  background: linear-gradient(45deg, #444444, #f8f8ff);
+  /* height: 2000px; */
 
+  color: #5e5e5e;
+  /* background: linear-gradient(45deg, #444444, #f8f8ff); */
+  background-color: #d0d6d8;
 }
 /*background-color: #d0d6d8; */
 
@@ -117,7 +116,7 @@ nav .user-icon svg {
 .logo {
   display: flex;
   align-items: center;
-  font-family: 'Questrial', sans-serif;
+  font-family: "Questrial", sans-serif;
   font-size: 18px;
 }
 
@@ -141,9 +140,3 @@ nav .user-icon svg {
   justify-content: center;
   align-items: center;
 }
-
-
-
-
-
-

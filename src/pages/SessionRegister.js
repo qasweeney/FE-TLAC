@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import SessionList from "../components/SessionList";
 import { useUser } from "../contexts/UserContext";
+import "./sessionRegister.css";
+
 const apiUrl = process.env.REACT_APP_API_URL;
 
 function SessionRegister() {
@@ -133,51 +135,52 @@ function SessionRegister() {
     }
   }
   return (
-    <div>
+    <div className="session-register-wrapper">
       <Navbar />
-      <h1>Session Register</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="date">Date:</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            min={today}
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="time">Time (Optional):</label>
-          <input
-            type="time"
-            id="time"
-            name="time"
-            value={formData.time}
-            onChange={handleChange}
-          />
-        </div>
-
-        <button type="submit">Search Sessions</button>
-      </form>
-      {error && <p className="error">{error}</p>}
-      <div>
-        {sessions.length > 0 ? (
+      <div className="session-register">
+        <form onSubmit={handleSubmit}>
           <div>
-            <h2>Available sessions:</h2>
-            <SessionList
-              onRegister={handleRegister}
-              view="member"
-              type="available"
-              sessions={sessions}
-              currentSessions={currentSessions}
+            <label htmlFor="date">Date:</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              min={today}
+              value={formData.date}
+              onChange={handleChange}
+              required
             />
           </div>
-        ) : (
-          <p>No sessions found for the selected criteria.</p>
-        )}
+          <div>
+            <label htmlFor="time">Time (Optional):</label>
+            <input
+              type="time"
+              id="time"
+              name="time"
+              value={formData.time}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button type="submit">Search Sessions</button>
+        </form>
+        {error && <p className="error">{error}</p>}
+        <div>
+          {sessions.length > 0 ? (
+            <div>
+              <h2>Available sessions:</h2>
+              <SessionList
+                onRegister={handleRegister}
+                view="member"
+                type="available"
+                sessions={sessions}
+                currentSessions={currentSessions}
+              />
+            </div>
+          ) : (
+            <p>No sessions found for the selected criteria.</p>
+          )}
+        </div>
       </div>
     </div>
   );

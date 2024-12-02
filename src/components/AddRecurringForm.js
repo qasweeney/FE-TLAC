@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./addRecurringForm.css";
 
 function AddRecurringForm({ onSubmit }) {
   const [formData, setFormData] = useState({
@@ -39,51 +40,53 @@ function AddRecurringForm({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="dayOfWeek">Day of the Week:</label>
-        <select
-          id="dayOfWeek"
-          name="dayOfWeek"
-          value={formData.dayOfWeek}
-          onChange={handleInputChange}
-        >
-          <option value="" disabled>
-            Select a day
-          </option>
-          {daysOfWeek.map((day) => (
-            <option key={day} value={day}>
-              {day}
+    <div className="add-recurring-form">
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="dayOfWeek">Day of the Week:</label>
+          <select
+            id="dayOfWeek"
+            name="dayOfWeek"
+            value={formData.dayOfWeek}
+            onChange={handleInputChange}
+          >
+            <option value="" disabled>
+              Select a day
             </option>
-          ))}
-        </select>
-      </div>
+            {daysOfWeek.map((day) => (
+              <option key={day} value={day}>
+                {day}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div>
-        <label htmlFor="startTime">Start Time:</label>
-        <input
-          id="startTime"
-          name="startTime"
-          type="time"
-          value={formData.startTime}
-          onChange={handleInputChange}
-        />
-      </div>
+        <div>
+          <label htmlFor="startTime">Start Time:</label>
+          <input
+            id="startTime"
+            name="startTime"
+            type="time"
+            value={formData.startTime}
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <div>
-        <label htmlFor="price">Price:</label>
-        <input
-          id="price"
-          name="price"
-          type="number"
-          step="0.01"
-          value={formData.price}
-          onChange={handleInputChange}
-        />
-      </div>
+        <div>
+          <label htmlFor="price">Price:</label>
+          <input
+            id="price"
+            name="price"
+            type="number"
+            step="0.01"
+            value={formData.price}
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <button type="submit">Add Recurring</button>
-    </form>
+        <button type="submit">Add Recurring</button>
+      </form>
+    </div>
   );
 }
 

@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar";
 import { useUser } from "../contexts/UserContext";
 import DisplaySchedule from "../components/DisplaySchedule";
 import AddRecurringForm from "../components/AddRecurringForm";
+import "./editSchedule.css";
+
 const apiUrl = process.env.REACT_APP_API_URL;
 
 function EditSchedule() {
@@ -11,12 +13,9 @@ function EditSchedule() {
   const [loading, setLoading] = useState(true);
 
   const handleSubmit = async (formData) => {
-    // Example: Fetch current recurring and unique sessions from the server
     const fetchSessions = async () => {
       try {
         getSchedule();
-        // const recurringResponse = await fetch("/api/recurringSessions");
-        // const recurringSessions = await recurringResponse.json();
         const requestOptions = {
           method: "GET",
           redirect: "follow",
@@ -155,28 +154,8 @@ function EditSchedule() {
       .then((result) => {
         alert("Recurring session added");
         getSchedule();
-        // console.log(result)
       })
       .catch((error) => console.error(error));
-    // try {
-    //   const response = await fetch("/api/addRecurring", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(formData),
-    //   });
-
-    //   if (response.ok) {
-    //     alert("Recurring session added successfully!");
-    //   } else {
-    //     const error = await response.json();
-    //     alert(`Failed to add recurring session: ${error.message}`);
-    //   }
-    // } catch (error) {
-    //   console.error("Error submitting form:", error);
-    //   alert("An error occurred while adding the recurring session.");
-    // }
   };
 
   const removeEntry = async (sessionID) => {
@@ -228,15 +207,17 @@ function EditSchedule() {
     );
   }
   return (
-    <div>
+    <div className="edit-schedule">
       <Navbar />
-      <h1>Edit Schedule</h1>
-      <AddRecurringForm onSubmit={handleSubmit} />
-      <p>
-        Warning: Removing a time slot from your schedule WILL NOT cancel
-        sessions that were already registered under that time.
-      </p>
-      <DisplaySchedule removeEntry={removeEntry} schedule={schedule} />
+      <div className="edit-schedule-content">
+        <h1>Edit Schedule</h1>
+        <AddRecurringForm onSubmit={handleSubmit} />
+        <p className="warning">
+          Warning: Removing a time slot from your schedule WILL NOT cancel
+          sessions that were already registered under that time.
+        </p>
+        <DisplaySchedule removeEntry={removeEntry} schedule={schedule} />
+      </div>
     </div>
   );
 }

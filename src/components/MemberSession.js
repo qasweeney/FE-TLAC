@@ -38,7 +38,7 @@ function MemberSession(props) {
 
   if (props.type === "available") {
     return (
-      <div>
+      <div className={props.className}>
         <h3>Session</h3>
         <p>
           Trainer Name:{" "}

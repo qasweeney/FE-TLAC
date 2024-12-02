@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { useUser } from "../contexts/UserContext";
 import SessionList from "../components/SessionList";
 import Filter from "../components/Filter";
+import "./memberDashboard.css";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 function MemberPastSessions(props) {
@@ -11,6 +12,7 @@ function MemberPastSessions(props) {
   const [filteredSessions, setFilteredSessions] = useState(sessions);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
 
   const updateRating = (sessionId, newRating) => {
     const myHeaders = new Headers();
@@ -58,16 +60,26 @@ function MemberPastSessions(props) {
   useState(() => {
     fetchSessions();
   }, [userId, sessions]);
+  const toggleShowFilter = () => {
+    setShowFilter(!showFilter);
+  };
   return (
     <div>
       <Navbar />
-      <h1>Member Past Sessions</h1>
-      <Filter
-        sessions={sessions}
-        setFilteredSessions={setFilteredSessions}
-        view="member"
-        subView="past"
-      />
+      <div className="top-section">
+        <h2>Past Sessions:</h2>
+        <button onClick={toggleShowFilter}>
+          {showFilter ? "Hide" : "Show"} Filter
+        </button>
+      </div>
+      {showFilter && (
+        <Filter
+          sessions={sessions}
+          setFilteredSessions={setFilteredSessions}
+          view="member"
+          subView="past"
+        />
+      )}
       <SessionList
         updateRating={updateRating}
         view="member"

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../contexts/UserContext";
 import Navbar from "../components/Navbar";
+import "./createSession.css";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 function CreateSession() {
@@ -182,59 +183,61 @@ function CreateSession() {
     return <div>Error: {error}</div>;
   }
   return (
-    <div>
+    <div className="create-session-wrapper">
       <Navbar />
-      <h1>Create Session</h1>
-      <div className="create-session-container">
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="date">Date:</label>
-            <input
-              type="date"
-              id="date"
-              name="date"
-              min={today}
-              value={formData.date}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="time">Time:</label>
-            <input
-              type="time"
-              id="time"
-              name="time"
-              value={formData.time}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="price">Price ($):</label>
-            <input
-              type="number"
-              id="price"
-              name="price"
-              value={formData.price}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (/^\d*(\.\d{0,2})?$/.test(value)) {
-                  setFormData({
-                    ...formData,
-                    price: value,
-                  });
-                }
-              }}
-              step="0.01"
-              min="0"
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Create Session
-          </button>
-        </form>
+      <div className="create-session">
+        <h1>Create Session</h1>
+        <div className="create-session-container">
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="date">Date:</label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                min={today}
+                value={formData.date}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="time">Time:</label>
+              <input
+                type="time"
+                id="time"
+                name="time"
+                value={formData.time}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="price">Price ($):</label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                value={formData.price}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^\d*(\.\d{0,2})?$/.test(value)) {
+                    setFormData({
+                      ...formData,
+                      price: value,
+                    });
+                  }
+                }}
+                step="0.01"
+                min="0"
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Create Session
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

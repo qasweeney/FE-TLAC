@@ -1,3 +1,4 @@
+import "./sessionList.css";
 function TrainerSession(props) {
   function getTimeFromString(timeString) {
     const [hours, minutes, seconds] = timeString.split(":").map(Number);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { useUser } from "../contexts/UserContext";
+import "./profile.css";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 function Profile() {
@@ -105,92 +106,86 @@ function Profile() {
   const data = profileData;
 
   return (
-    <div>
+    <div className="profile-wrapper">
       <Navbar />
-
-      <h1>Profile</h1>
-      <p>
-        <strong>Email:</strong> {profileData.email}
-      </p>
-      <p>
-        <strong>Full Name:</strong> {`${data.firstName} ${data.lastName}`}
-      </p>
-      {userType === "Member" && (
+      <div className="profile">
+        <h1>Profile</h1>
         <p>
-          <strong>Phone Number:</strong> {profileData.phone}
+          <strong>Email:</strong> {profileData.email}
         </p>
-      )}
-      {userType === "Admin" && (
-        <p>Display other necessary admin data here (TBD)</p>
-      )}
-      {userType === "Trainer" && (
-        <div>
-          <div className="profile-pic-section">
-            <h2>Profile Picture</h2>
-            {!isEditingProfilePic ? (
-              <div>
-                <img
-                  src={data.profilePic}
-                  alt="Profile"
-                  style={{
-                    width: "150px",
-                    height: "150px",
-                    borderRadius: "50%",
-                  }}
-                />
-                <button onClick={() => setIsEditingProfilePic(true)}>
-                  Edit
-                </button>
-              </div>
-            ) : (
-              <div>
-                <input
-                  type="url"
-                  value={data.profilePic}
-                  onChange={handleProfilePicChange}
-                  placeholder="Enter new profile picture URL"
-                />
-                <button onClick={() => updateProfile("profilePic")}>
-                  Save
-                </button>
-                <button onClick={() => setIsEditingProfilePic(false)}>
-                  Cancel
-                </button>
-              </div>
-            )}
-          </div>
+        <p>
+          <strong>Full Name:</strong> {`${data.firstName} ${data.lastName}`}
+        </p>
+        {userType === "Member" && (
+          <p>
+            <strong>Phone Number:</strong> {profileData.phone}
+          </p>
+        )}
+        {userType === "Admin" && (
+          <p>Display other necessary admin data here (TBD)</p>
+        )}
+        {userType === "Trainer" && (
+          <div>
+            <div className="profile-pic-section">
+              <h2>Profile Picture</h2>
+              {!isEditingProfilePic ? (
+                <div>
+                  <img src={data.profilePic} alt="Profile" />
+                  <br />
+                  <button onClick={() => setIsEditingProfilePic(true)}>
+                    Edit
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <input
+                    type="url"
+                    value={data.profilePic}
+                    onChange={handleProfilePicChange}
+                    placeholder="Enter new profile picture URL"
+                  />
+                  <button onClick={() => updateProfile("profilePic")}>
+                    Save
+                  </button>
+                  <button onClick={() => setIsEditingProfilePic(false)}>
+                    Cancel
+                  </button>
+                </div>
+              )}
+            </div>
 
-          <div className="bio-section">
-            <h2>Bio</h2>
-            {!isEditingBio ? (
-              <div>
-                <p>{data.bio || "No bio available."}</p>
-                <button onClick={() => setIsEditingBio(true)}>Edit</button>
-              </div>
-            ) : (
-              <div>
-                <textarea
-                  value={data.bio}
-                  onChange={handleBioChange}
-                  rows="5"
-                  placeholder="Enter new bio"
-                ></textarea>
-                <button onClick={() => updateProfile("bio")}>Save</button>
-                <button onClick={() => setIsEditingBio(false)}>Cancel</button>
-              </div>
-            )}
+            <div className="bio-section">
+              <h2>Bio</h2>
+              {!isEditingBio ? (
+                <div>
+                  <p>{data.bio || "No bio available."}</p>
+                  <button onClick={() => setIsEditingBio(true)}>Edit</button>
+                </div>
+              ) : (
+                <div>
+                  <textarea
+                    value={data.bio}
+                    onChange={handleBioChange}
+                    rows="5"
+                    placeholder="Enter new bio"
+                  ></textarea>
+                  <button onClick={() => updateProfile("bio")}>Save</button>
+                  <button onClick={() => setIsEditingBio(false)}>Cancel</button>
+                </div>
+              )}
+            </div>
+            <p>
+              <strong>Registration Date:</strong> {data.registrationDate}
+            </p>
+            <p>
+              <strong>Session Price:</strong> ${data.sessionPrice}
+            </p>
+            <p>
+              <strong>Phone Number:</strong> {data.phone}
+            </p>
           </div>
-          <p>
-            <strong>Registration Date:</strong> {data.registrationDate}
-          </p>
-          <p>
-            <strong>Session Price:</strong> ${data.sessionPrice}
-          </p>
-          <p>
-            <strong>Phone Number:</strong> {data.phone}
-          </p>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

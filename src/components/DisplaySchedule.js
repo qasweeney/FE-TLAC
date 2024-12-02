@@ -1,5 +1,5 @@
 import DisplayScheduleDay from "./DisplayScheduleDay";
-import Navbar from "./Navbar";
+import "./displaySchedule.css";
 
 function DisplaySchedule({ schedule, removeEntry }) {
   const daysOfWeek = [
@@ -12,7 +12,7 @@ function DisplaySchedule({ schedule, removeEntry }) {
     "Saturday",
   ];
   return (
-    <div>
+    <div className="display-schedule">
       <h1>DisplaySchedule</h1>
       {daysOfWeek.map((day, i) => (
         <DisplayScheduleDay
