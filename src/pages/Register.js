@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { replace, useNavigate } from "react-router-dom";
+import "./Register.css";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 function Register() {
@@ -64,24 +65,30 @@ function Register() {
   return (
     <div>
       <Navbar />
-      <form onSubmit={handleSubmit}>
+      <div className="register-container">
+       <form onSubmit={handleSubmit}>
+       <div className="role-select">
         <label>
           Register as:
-          <select value={role} onChange={(e) => setRole(e.target.value)}>
+          <select value={role} onChange={(e) => setRole(e.target.value)}
+          className="role-select-input"
+          >
             <option value="member">Member</option>
             <option value="trainer">Trainer</option>
           </select>
         </label>
+      </div>
 
         {role === "member" && (
-          <div>
+          <div className="member-form">
             <h3>Member Registration</h3>
-            <input name="firstname" type="text" placeholder="Nick" required />
-            <input name="lastname" type="text" placeholder="Saban" required />
+            <input name="firstname" type="text" placeholder="Nick" className="input-field" required />
+            <input name="lastname" type="text" placeholder="Saban" className="input-field" required />
             <input
               name="email"
               type="text"
               placeholder="nick.saban@rolltide.com"
+              className="input-field"
               required
             />
             <input
@@ -92,30 +99,34 @@ function Register() {
               onChange={handlePhoneChange}
               placeholder="(123) 456-7890"
               maxLength={14}
+              className="input-field"
               required
             />
             <input
               name="password"
               type="password"
               placeholder="Password"
+              className="input-field"
               required
             />
           </div>
         )}
 
         {role === "trainer" && (
-          <div>
+          <div className="trainer-form">
             <h3>Trainer Registration</h3>
             <input
               name="trainerSpecificField"
               placeholder="Trainer Field"
+              className="input-field"
               required
             />
           </div>
         )}
 
-        <button type="submit">Register</button>
+        <button type="submit" className="submit-button">Register</button>
       </form>
+      </div>
     </div>
   );
 }

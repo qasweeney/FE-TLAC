@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { useState } from "react";
 import { useUser } from "../contexts/UserContext";
+import "./Login.css";
+import "./Login.css";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 function Login() {
@@ -69,28 +71,43 @@ function Login() {
       setError("An error occurred. Please try again.");
     }
   };
+  
+
+
+
 
   return (
-    <div>
+    <div className="login-page">
       <Navbar />
+      <div className="login-container">
       <h2>Login</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
       <form onSubmit={handleLogin}>
+      <div className="input-wrapper">
         <input
           type="text"
-          placeholder="Username"
+          id="username"
+          placeholder=" "
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+        <label htmlFor="username">Username</label>
+       </div>
+       <div className="input-wrapper">
         <input
           type="password"
-          placeholder="Password"
+          id="password"
+          placeholder=" "
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div>
-          <label>User Type:</label>
+        <label htmlFor="password">Password</label>
+        </div>
+
+        <div className="input-wrapper">
+          <label htmlFor="userType">User Type:</label>
           <select
+            id="userType"
             value={userType}
             onChange={(e) => setUserType(e.target.value)}
           >
@@ -102,6 +119,7 @@ function Login() {
         <button type="submit">Login</button>
       </form>
     </div>
+  </div>
   );
 }
 
