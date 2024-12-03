@@ -1,0 +1,79 @@
+.login {
+  padding: 20px;
+  max-width: 400px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.login .error {
+  color: #d9534f;
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.login form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login form input,
+.login form select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.login form input:focus,
+.login form select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.login form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.login form div label {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.login button {
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login button:hover {
+  background-color: #0056b3;
+}
+
+.login button:active {
+  background-color: #004085;
+  transform: scale(0.97);
+}
