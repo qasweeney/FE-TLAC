@@ -10,6 +10,7 @@ function TrainerDashboard() {
   const [sessions, setExistingSessions] = useState(null);
   const [loading, setLoading] = useState(true);
   const [filteredSessions, setFilteredSessions] = useState(sessions);
+  const [showUpcoming, setShowUpcoming] = useState(true);
   const [showFilter, setShowFilter] = useState(false);
 
   const [error, setError] = useState(null);
@@ -42,11 +43,18 @@ function TrainerDashboard() {
   const toggleShowFilter = () => {
     setShowFilter(!showFilter);
   };
+  const toggleShowUpcoming = () => {
+    setShowUpcoming(!showUpcoming);
+  };
   return (
     <div>
       <Navbar />
       <div className="top-section">
-        <h2>Upcoming Sessions:</h2>
+        <h2>{showUpcoming ? "Upcoming" : "Unregistered"} Sessions:</h2>
+        <button onClick={toggleShowUpcoming}>
+          Show {showUpcoming ? "Unregistered" : "Upcoming"}
+        </button>{" "}
+        <br />
         <button onClick={toggleShowFilter}>
           {showFilter ? "Hide" : "Show"} Filter
         </button>
@@ -61,9 +69,10 @@ function TrainerDashboard() {
       <SessionList
         refresh={fetchSessions}
         view="trainer"
-        type="registered"
+        type={showUpcoming ? "registered" : "unregistered"}
         sessions={filteredSessions}
       />
+      {/* <SessionList refresh={fetchSessions} view="trainer" type="unregistered" sessions={filteredSessions} /> */}
     </div>
   );
 }

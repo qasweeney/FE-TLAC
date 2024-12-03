@@ -15,6 +15,7 @@
 }
 
 .top-section button {
+  justify-content: right;
   padding: 8px 16px;
   font-size: 1rem;
   color: #fff;

@@ -29,6 +29,27 @@ function SessionList(props) {
     );
   }
 
+  if (props.type === "unregistered" && props.view === "trainer") {
+    const registeredSessions = props.sessions.filter(
+      (s) => s.sessionStatus.toLowerCase() === "available"
+    );
+    return (
+      <div className="sessions-container">
+        {registeredSessions.map((s, i) => {
+          return (
+            <TrainerSession
+              className="session-card"
+              type={props.type}
+              key={i}
+              session={s}
+              refresh={props.refresh}
+            />
+          );
+        })}
+      </div>
+    );
+  }
+
   if (props.type === "past" && props.view === "trainer") {
     // return (
     // )

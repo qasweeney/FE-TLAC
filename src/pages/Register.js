@@ -28,7 +28,6 @@ function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    console.log(formData.email);
     formData.append("role", role);
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -68,7 +67,6 @@ function Register() {
         }
         return response.text();
       })
-      .then((result) => console.log(result))
       .catch((error) => console.error(error));
   };
 

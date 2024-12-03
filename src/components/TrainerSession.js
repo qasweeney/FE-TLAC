@@ -19,6 +19,28 @@ function TrainerSession(props) {
 
   sessionDate.setHours(hours, minutes, seconds);
 
+  const deleteSession = async (sessionID) => {
+    const requestOptions = {
+      method: "PUT",
+      credentials: "include",
+      redirect: "follow",
+    };
+
+    fetch(
+      `${apiUrl}sessions/edit-schedule/remove/${props.session.sessionID}`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        if (result === true) {
+          alert("Canceled");
+          props.refresh();
+        } else {
+          alert("Error");
+        }
+      })
+      .catch((error) => console.error(error));
+  };
   const handleUnregister = () => {
     const requestOptions = {
       method: "PUT",
@@ -71,6 +93,23 @@ function TrainerSession(props) {
         ) : (
           <p>Rating: {props.session.rating}</p>
         )}
+      </div>
+    );
+  } else if (
+    props.type === "unregistered" &&
+    sessionDate >= new Date() &&
+    props.session.sessionStatus === "Available" &&
+    props.session.sessionType === "One-Time"
+  ) {
+    return (
+      <div className={props.className}>
+        <h3>Session</h3>
+        <p>Date: {new Date(props.session.date).toDateString()}</p>
+        <p>Time: {getTimeFromString(props.session.startTime)}</p>
+        <p>Price: ${props.session.price}</p>
+        <button className="cancel-button" onClick={deleteSession}>
+          Cancel
+        </button>
       </div>
     );
   } else {

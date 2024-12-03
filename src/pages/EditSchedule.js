@@ -130,8 +130,6 @@ function EditSchedule() {
       return;
     }
 
-    // If no conflicts, submit the form
-    console.log("submit");
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 

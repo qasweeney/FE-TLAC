@@ -46,7 +46,6 @@ function Login() {
       if (response.ok) {
         setGlobalUserType(userType);
         let res = await response.json();
-        console.log(res.userId);
 
         if (userType === "Admin") {
           navigate("/admin/dashboard");
