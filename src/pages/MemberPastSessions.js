@@ -4,6 +4,7 @@ import { useUser } from "../contexts/UserContext";
 import SessionList from "../components/SessionList";
 import Filter from "../components/Filter";
 import "./memberDashboard.css";
+import "./trainerPastSessions.css";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 function MemberPastSessions(props) {

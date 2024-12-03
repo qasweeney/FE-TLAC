@@ -21,6 +21,7 @@ function SessionList(props) {
               type={props.type}
               key={i}
               session={s}
+              refresh={props.refresh}
             />
           );
         })}
@@ -42,6 +43,7 @@ function SessionList(props) {
               type={props.type}
               key={i}
               session={s}
+              refresh={props.refresh}
             />
           );
         })}

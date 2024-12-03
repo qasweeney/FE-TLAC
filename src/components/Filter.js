@@ -9,6 +9,8 @@ const Filter = ({ sessions, setFilteredSessions, view, subView }) => {
     price: "",
     time: "",
     rating: "both",
+    month: "",
+    year: "",
   });
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -45,6 +47,20 @@ const Filter = ({ sessions, setFilteredSessions, view, subView }) => {
         return `${session.member.firstName} ${session.member.lastName}`
           .toLowerCase()
           .includes(filters.member.toLowerCase());
+      });
+    }
+
+    if (filters.month) {
+      filtered = filtered.filter((session) => {
+        const sessionMonth = new Date(session.date).getMonth() + 1;
+        return sessionMonth.toString() === filters.month;
+      });
+    }
+
+    if (filters.year) {
+      filtered = filtered.filter((session) => {
+        const sessionYear = new Date(session.date).getFullYear();
+        return sessionYear.toString() === filters.year;
       });
     }
 
@@ -90,15 +106,46 @@ const Filter = ({ sessions, setFilteredSessions, view, subView }) => {
       </div>
       <div>
         <label>
-          Trainer Name:
-          <input
-            type="text"
-            name="trainer"
-            value={filters.trainer}
+          Month:
+          <select
+            name="month"
+            value={filters.month}
             onChange={handleFilterChange}
+          >
+            <option value="">All Months</option>
+            {Array.from({ length: 12 }, (_, i) => (
+              <option key={i + 1} value={i + 1}>
+                {new Date(0, i).toLocaleString("default", { month: "long" })}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <div>
+        <label>
+          Year:
+          <input
+            type="number"
+            name="year"
+            value={filters.year}
+            onChange={handleFilterChange}
+            placeholder="YYYY"
           />
         </label>
       </div>
+      {view !== "trainer" && (
+        <div>
+          <label>
+            Trainer Name:
+            <input
+              type="text"
+              name="trainer"
+              value={filters.trainer}
+              onChange={handleFilterChange}
+            />
+          </label>
+        </div>
+      )}
       {view !== "member" && (
         <div>
           <label>

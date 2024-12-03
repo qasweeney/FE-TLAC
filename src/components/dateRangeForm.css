@@ -1,0 +1,78 @@
+.date-range-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.date-range-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.date-range-form form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-range-form label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.date-range-form input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.date-range-form input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.date-range-form button {
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.date-range-form button:hover {
+  background-color: #218838;
+}
+
+.date-range-form button:active {
+  background-color: #1e7e34;
+  transform: scale(0.97);
+}
+
+.date-range-form .data-summary {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.date-range-form .data-summary p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.date-range-form .data-summary p strong {
+  color: #333;
+  font-weight: bold;
+}

@@ -1,0 +1,22 @@
+.display-schedule {
+  margin-top: 20px;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.display-schedule h1 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.display-schedule .day {
+  margin-bottom: 12px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #f7f7f7;
+}

@@ -77,6 +77,8 @@ nav ul li button {
   padding: 10px;
   border: none;
   background: none;
+  display: inline-block;
+  line-height: 1;
 }
 
 nav ul li a:hover,

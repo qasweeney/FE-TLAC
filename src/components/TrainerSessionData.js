@@ -1,3 +1,5 @@
+import "./trainerSessionData.css";
+
 function TrainerSessionData(props) {
   const sessions = props.sessions;
   const today = new Date();
@@ -11,10 +13,11 @@ function TrainerSessionData(props) {
     }
   });
   return (
-    <div>
-      <h2>Financial Session Data:</h2>
+    <div className="financial-session-data">
+      <h2>Gross Session Data:</h2>
       <p>
-        Total Revenue (-10% fee): <strong>${totalRev}</strong>
+        Total Revenue (-10% fee):{" "}
+        <strong>${Math.round(totalRev * 100) / 100}</strong>
       </p>
       <p>
         Total Sessions: <strong>{count}</strong>

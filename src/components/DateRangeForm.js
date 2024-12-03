@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./dateRangeForm.css";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const DateRangeForm = () => {
@@ -36,7 +37,7 @@ const DateRangeForm = () => {
   };
 
   return (
-    <div>
+    <div className="date-range-form">
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="startDate">Start Date:</label>
@@ -61,7 +62,7 @@ const DateRangeForm = () => {
         <button type="submit">Submit</button>
       </form>
       {data && (
-        <div>
+        <div className="data-summary">
           <p>Total Revenue: ${data.totalRevenue}</p>
           <p>
             Total Profit (10% of revenue): $

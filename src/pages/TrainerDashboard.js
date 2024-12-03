@@ -59,6 +59,7 @@ function TrainerDashboard() {
         />
       )}
       <SessionList
+        refresh={fetchSessions}
         view="trainer"
         type="registered"
         sessions={filteredSessions}

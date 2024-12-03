@@ -61,6 +61,7 @@ function MemberDashboard() {
         />
       )}
       <SessionList
+        refresh={fetchSessions}
         view="member"
         type="registered"
         sessions={filteredSessions}

@@ -24,6 +24,23 @@ function MemberSession(props) {
     }
   };
 
+  const handleUnregister = () => {
+    const requestOptions = {
+      method: "PUT",
+      redirect: "follow",
+    };
+
+    fetch(
+      `${apiUrl}sessions/unregister/${props.session.sessionID}`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .catch((error) => console.error(error));
+
+    alert("Session canceled");
+    props.refresh();
+  };
+
   const handleSave = () => {
     props.updateRating(props.session.sessionID, parseFloat(rating));
     setIsEditing(false);
@@ -35,7 +52,11 @@ function MemberSession(props) {
     date.setHours(hours, minutes, seconds, 0);
     return date.toLocaleTimeString();
   }
+  const [hours, minutes, seconds] = props.session.startTime
+    .split(":")
+    .map(Number);
 
+  sessionDate.setHours(hours, minutes, seconds);
   if (props.type === "available") {
     return (
       <div className={props.className}>
@@ -71,7 +92,7 @@ function MemberSession(props) {
     );
   } else if (
     props.type === "registered" &&
-    sessionDate > today &&
+    sessionDate >= today &&
     props.session.sessionStatus === "Registered"
   ) {
     return (
@@ -102,6 +123,9 @@ function MemberSession(props) {
         <p>Date: {sessionDate.toDateString()}</p>
         <p>Price: ${props.session.price}</p>
         {showTrainerGlance ? <TrainerProfileGlance trainer={trainer} /> : null}
+        <button className="cancel-button" onClick={handleUnregister}>
+          Cancel
+        </button>
       </div>
     );
   } else if (
@@ -155,7 +179,9 @@ function MemberSession(props) {
         ) : (
           <p>
             Rating: {props.session.rating}{" "}
-            <button onClick={() => setIsEditing(true)}>Edit</button>
+            <button className="edit-button" onClick={() => setIsEditing(true)}>
+              Edit
+            </button>
           </p>
         )}
         {showTrainerGlance ? <TrainerProfileGlance trainer={trainer} /> : null}

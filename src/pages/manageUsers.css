@@ -1,0 +1,230 @@
+/* .manage-users {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+}
+
+.manage-users h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.manage-users h2 {
+  font-size: 1.5rem;
+  color: #444;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.user-list {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 70%;
+}
+
+.user-list p {
+  margin: 8px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.user-list button {
+  margin-top: 8px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.user-list .bad {
+  background-color: #d9534f;
+}
+.user-list .bad:hover {
+  background-color: #c9302c;
+}
+.user-list .bad:active {
+  background-color: #ac2925;
+}
+
+.user-list button:hover {
+  background-color: #218838;
+}
+
+.user-list button:active {
+  background-color: #1e7e34;
+  transform: scale(0.97);
+}
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px;
+}
+
+.user-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  width: calc(33.333% - 16px);
+  max-width: 300px;
+  text-align: center;
+}
+
+.user-card p {
+  margin: 8px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.user-card button {
+  margin-top: 12px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: #fff;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.user-card button:hover {
+  background-color: #c82333;
+}
+
+.user-card button:active {
+  background-color: #bd2130;
+  transform: scale(0.97);
+} */
+
+/* General Styling */
+
+.manage-users {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.manage-users h1 {
+  font-size: 2rem;
+  text-align: center;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+.manage-users h2 {
+  font-size: 1.5rem;
+  color: #444;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+/* User List Styling */
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0;
+  margin-bottom: 32px;
+  justify-content: center; /* Centers the cards horizontally */
+}
+
+/* User Card Styling */
+.user-card {
+  flex: 1 1 calc(33.333% - 16px);
+  max-width: calc(33.333% - 16px);
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  text-align: center;
+}
+
+.user-card p {
+  margin: 8px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Button Styling */
+.user-card button {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.user-card button:hover {
+  transform: scale(1.05);
+}
+
+.user-card button:active {
+  transform: scale(0.97);
+}
+
+.user-card .bad {
+  background-color: #dc3545;
+  color: white;
+  margin-top: 8px;
+}
+
+.user-card .bad:hover {
+  background-color: #c82333;
+}
+
+.user-card .bad:active {
+  background-color: #bd2130;
+}
+
+.user-card .approve {
+  background-color: #28a745;
+  color: white;
+}
+
+.user-card .approve:hover {
+  background-color: #218838;
+}
+
+.user-card .approve:active {
+  background-color: #1e7e34;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .user-card {
+    flex: 1 1 calc(50% - 16px);
+    max-width: calc(50% - 16px);
+  }
+}
+
+@media (max-width: 480px) {
+  .user-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}

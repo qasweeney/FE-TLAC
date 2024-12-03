@@ -31,3 +31,55 @@
   color: #555;
   font-size: 0.9rem;
 }
+
+.cancel-button {
+  padding: 8px 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #dc3545; /* Red for cancellation */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cancel-button:hover {
+  background-color: #c82333; /* Slightly darker red on hover */
+}
+
+.cancel-button:active {
+  background-color: #bd2130; /* Even darker red on click */
+  transform: scale(0.97); /* Slightly smaller on click */
+}
+
+.cancel-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.4); /* Red focus ring for accessibility */
+}
+
+.edit-button {
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff; /* Blue for editing action */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.edit-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.edit-button:active {
+  background-color: #004085; /* Even darker blue on click */
+  transform: scale(0.97); /* Slightly smaller on click */
+}
+
+.edit-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4); /* Blue focus ring for accessibility */
+}

@@ -1,0 +1,101 @@
+.session-register.wrapper {
+  width: 100%;
+}
+
+.session-register {
+  padding: 20px;
+  /* max-width: 800px; */
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.session-register h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.session-register form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.session-register form div {
+  margin-bottom: 16px;
+}
+
+.session-register form label {
+  display: block;
+  font-size: 1rem;
+  color: #555;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.session-register form input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.session-register form input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.session-register button {
+  display: inline-block;
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.session-register button:hover {
+  background-color: #0056b3;
+}
+
+.session-register button:active {
+  background-color: #004085;
+  transform: scale(0.97);
+}
+
+.session-register .error {
+  color: #d9534f;
+  font-size: 1rem;
+  margin-top: 12px;
+  text-align: center;
+  background-color: #f8d7da;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #f5c6cb;
+}
+
+.session-register h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.session-register p {
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
+}

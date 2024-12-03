@@ -1,4 +1,6 @@
 import "./sessionList.css";
+const apiUrl = process.env.REACT_APP_API_URL;
+
 function TrainerSession(props) {
   function getTimeFromString(timeString) {
     const [hours, minutes, seconds] = timeString.split(":").map(Number);
@@ -10,7 +12,32 @@ function TrainerSession(props) {
 
   const member = props.session.member;
   const sessionDate = new Date(props.session.date);
-  if (props.type === "registered" && sessionDate > new Date()) {
+
+  const [hours, minutes, seconds] = props.session.startTime
+    .split(":")
+    .map(Number);
+
+  sessionDate.setHours(hours, minutes, seconds);
+
+  const handleUnregister = () => {
+    const requestOptions = {
+      method: "PUT",
+      redirect: "follow",
+    };
+
+    fetch(
+      `${apiUrl}sessions/unregister/${props.session.sessionID}`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .catch((error) => console.error(error));
+
+    alert("Session canceled");
+    props.refresh();
+  };
+
+  const today = new Date();
+  if (props.type === "registered" && sessionDate >= today) {
     return (
       <div className={props.className}>
         <h3>Session</h3>
@@ -20,6 +47,9 @@ function TrainerSession(props) {
         <p>Date: {new Date(props.session.date).toDateString()}</p>
         <p>Time: {getTimeFromString(props.session.startTime)}</p>
         <p>Price: ${props.session.price}</p>
+        <button className="cancel-button" onClick={handleUnregister}>
+          Cancel
+        </button>
       </div>
     );
   } else if (
