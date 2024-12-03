@@ -1,83 +1,68 @@
-.register {
-  padding: 20px;
-  max-width: 600px;
-  margin: 40px auto;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.register form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.register form label {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 8px;
-  display: block;
-}
-
-.register form select,
-.register form input,
-.register form textarea {
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-.register form select:focus,
-.register form input:focus,
-.register form textarea:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-.register h3 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 16px;
-  text-align: center;
-}
-
-.register textarea {
-  resize: none;
-  height: 100px;
-}
-
-.register button {
-  padding: 12px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.register button:hover {
-  background-color: #0056b3;
-}
-
-.register button:active {
-  background-color: #004085;
-  transform: scale(0.97);
-}
-
-.register .form-section {
-  background-color: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
+.register-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #eceef2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #606063;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  .submit-button {
+    width: 100%;
+    padding: 14px;
+    background-color: #96b5ef;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #7394d0;
+  }
+  
+  .role-select {
+    margin-bottom: 20px;
+  }
+  
+  .role-select label {
+    font-size: 16px;
+    color: #606063;
+  }
+  
+  .role-select-input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  .member-form,
+  .trainer-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  
