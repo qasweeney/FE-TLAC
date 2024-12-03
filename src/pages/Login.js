@@ -72,7 +72,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="login-page">
       <Navbar />
       <div className="login">
         <h2>Login</h2>

@@ -40,7 +40,7 @@ function Register() {
       LastName: formData.get("lastname"),
       Phone: formData.get("phone"),
     });
-    if (role == "trainer") {
+    if (role === "trainer") {
       raw = JSON.stringify({
         Email: formData.get("email"),
         Password: formData.get("password"),
