@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# TLAC Application Setup and Usage Guide
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This guide provides instructions for setting up and running the TLAC application, including both the API and Frontend (FE), as well as an overview of the application's functionalities.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Setup Instructions
 
-### `npm start`
+### 1. Clone the Repositories
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **API Repository**: [https://github.com/qasweeney/API-TLAC](https://github.com/qasweeney/API-TLAC)
+- **Frontend Repository**: [https://github.com/qasweeney/FE-TLAC](https://github.com/qasweeney/FE-TLAC)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 2. Environment Configuration
 
-### `npm test`
+- The `.env` file is already configured in the **FE repository**. No changes are required.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 3. API Settings
 
-### `npm run build`
+- Download the `appsettings.json` file from the project submission and place it in the root of the **API repository**.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 4. Run the Application
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **API Repository**:
+  - Start the API: `dotnet run`
+  - If you'd like to see endpoints: `dotnet watch run`
+- **Frontend Repository**:
+  - Start the frontend: `npm start`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Login Credentials
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Admin Account
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Email**: [admin@tlac.com](mailto:admin@tlac.com)
+- **Password**: `password`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Predefined User Accounts
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. **Trainer Account**:
+   - **Email**: [billjones@example.com](mailto:billjones@example.com)
+   - **Password**: `password123`
+2. **Member Account**:
+   - **Email**: [john.doe@example.com](mailto:john.doe@example.com)
+   - **Password**: `password123`
 
-## Learn More
+### Creating New Accounts
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- You can create additional member and trainer accounts to explore functionality. However, if you'd like to view accounts with existing sessions, log in using the predefined accounts above.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Application Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### General
 
-### Analyzing the Bundle Size
+- All session list components have advanced filtering options that allow filtration by various data types.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Trainer Features
 
-### Making a Progressive Web App
+1. Create unique sessions.
+2. Create recurring sessions.
+3. Cancel sessions (registered or unregistered).
+4. View past sessions.
+5. View upcoming sessions.
+6. View upcoming unregistered sessions.
+7. Change profile picture and bio.
+8. View Key Performance Indicators (KPIs) for past sessions.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Member Features
 
-### Advanced Configuration
+1. Register for a session.
+2. View trainer profiles (including profile picture and bio) by clicking on their name in a session card.
+3. View upcoming sessions.
+4. View past sessions.
+5. Cancel an upcoming session.
+6. View and edit profile details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Admin Features
 
-### Deployment
+1. View KPIs for all users.
+2. Compare KPIs within specific time windows.
+3. Ban or unban admin and trainer accounts.
+4. Approve or deny pending trainer account applications.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
