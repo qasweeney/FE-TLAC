@@ -56,6 +56,7 @@ This guide provides instructions for setting up and running the TLAC application
 ### General
 
 - All session list components have advanced filtering options that allow filtration by various data types.
+- Whenever a user attempts to either register for or create a session that conflicts with a pre existing session by 1 hour, the request is rejected and the user is informed that the session conflicts with an existing session.
 
 ### Trainer Features
 
