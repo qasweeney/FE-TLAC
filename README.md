@@ -47,7 +47,7 @@ This guide provides instructions for setting up and running the TLAC application
 
 ### Creating New Accounts
 
-- You can create additional member and trainer accounts to explore functionality. However, if you'd like to view accounts with existing sessions, log in using the predefined accounts above.
+- You can create additional member and trainer accounts to explore functionality. However, if you'd like to view accounts with existing sessions, log in using the predefined accounts above. If you create a trainer account, you must first log in to the admin account and approve it before logging in to that trainer account.
 
 ---
 
