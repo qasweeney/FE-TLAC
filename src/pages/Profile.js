@@ -121,9 +121,6 @@ function Profile() {
             <strong>Phone Number:</strong> {profileData.phone}
           </p>
         )}
-        {userType === "Admin" && (
-          <p>Display other necessary admin data here (TBD)</p>
-        )}
         {userType === "Trainer" && (
           <div>
             <div className="profile-pic-section">
@@ -175,7 +172,8 @@ function Profile() {
               )}
             </div>
             <p>
-              <strong>Registration Date:</strong> {data.registrationDate}
+              <strong>Registration Date:</strong>{" "}
+              {new Date(data.registrationDate).toDateString()}
             </p>
             <p>
               <strong>Session Price:</strong> ${data.sessionPrice}

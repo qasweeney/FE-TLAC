@@ -83,7 +83,7 @@ function MemberSession(props) {
           </span>
         </p>
         <p>Time: {getTimeFromString(props.session.startTime)}</p>
-        <p>Price: ${props.session.price}</p>
+        <p>Price: ${props.session.price.toFixed(2)}</p>
         {showTrainerGlance ? <TrainerProfileGlance trainer={trainer} /> : null}
         <button onClick={() => props.onRegister(props.session)}>
           Register
@@ -121,7 +121,7 @@ function MemberSession(props) {
         </p>
         <p>Time: {getTimeFromString(props.session.startTime)}</p>
         <p>Date: {sessionDate.toDateString()}</p>
-        <p>Price: ${props.session.price}</p>
+        <p>Price: ${props.session.price.toFixed(2)}</p>
         {showTrainerGlance ? <TrainerProfileGlance trainer={trainer} /> : null}
         <button className="cancel-button" onClick={handleUnregister}>
           Cancel
@@ -159,7 +159,7 @@ function MemberSession(props) {
         </p>
         <p>Time: {getTimeFromString(props.session.startTime)}</p>
         <p>Date: {sessionDate.toDateString()}</p>
-        <p>Price: ${props.session.price}</p>
+        <p>Price: ${props.session.price.toFixed(2)}</p>
         {isEditing ? (
           <div>
             <label>

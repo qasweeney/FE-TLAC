@@ -133,6 +133,7 @@ function CreateSession() {
       alert(
         "The selected time conflicts with a recurring session in your schedule."
       );
+      return;
     }
 
     try {

@@ -13,7 +13,6 @@ function DisplaySchedule({ schedule, removeEntry }) {
   ];
   return (
     <div className="display-schedule">
-      <h1>DisplaySchedule</h1>
       {daysOfWeek.map((day, i) => (
         <DisplayScheduleDay
           key={i}

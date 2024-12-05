@@ -66,7 +66,7 @@ const DateRangeForm = () => {
           <p>Total Revenue: ${data.totalRevenue}</p>
           <p>
             Total Profit (10% of revenue): $
-            {Math.ceil(data.totalRevenue * 0.1 * 100) / 100}
+            {(Math.ceil(data.totalRevenue * 0.1 * 100) / 100).toFixed(2)}
           </p>
           <p>Total Sessions: {data.totalSessions}</p>
           <p>Active Members: {data.activeMembers}</p>
